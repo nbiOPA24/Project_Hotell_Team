@@ -90,6 +90,19 @@ public class Booking
         Enddate = enddate;
         Status = status;
     }
+    //Metod för att bekräfta en bokning
+    public void ConfirmBooking()
+    {
+        Status = "Confirmed";
+        Console.WriteLine($"Bokning {Bookingid} är bekräftad för kund {Customer.Name}");
+    }
+
+    //Metod för att kunna avboka en bokning
+    public void CancelBooking()
+    {
+        Status = "Cancelled";
+        Console.WriteLine($"Bokning {Bookingid} har avbokats av kund {Customer.Name}");
+    }
 }
 
 public class Customer
