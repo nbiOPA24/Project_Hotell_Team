@@ -16,9 +16,10 @@
 //Kunder och personal ska kunna logga in med olika användarroller.
 //Designa en lättnavigerad användargränssnitt där kunder och personal enkelt kan använda systemet.
 
+// Enum för available, booked och undermaintenance
 public enum Roomstatus
 {
-    Avalable,
+    Available,
     Booked,
     UnderMaintenance,
 }
@@ -36,6 +37,38 @@ public class Room
         Roomtype = roomtype;
         Capacity = capacity;
         Status = status;
+    }
+    //Metod kopplat till Available i enum och för att se om rummet är ledigt.
+    public bool IsAvailable()
+    {
+        return Status == Roomstatus.Available;
+    }
+
+    //Metod för att boka rummet
+    public void Book()
+    {
+        if(IsAvailable())
+        {
+            Status = Roomstatus.Booked;
+            Console.WriteLine("Rummet har bokats!");
+        }
+        else
+        {
+            Console.WriteLine("Rummet är tyvärr inte tillgängligt");
+        }
+    }
+    //Metod för att sätta rum under underhåll
+    public void SetUnderMaintenance()
+    {
+        if(Status != Roomstatus.UnderMaintenance)
+        {
+            Status = Roomstatus.UnderMaintenance;
+            Console.WriteLine($"Rummet {Roomtype} med ID {Roomid} är nu satt till underhåll");
+        }
+        else
+        {
+            Console.WriteLine($"Rummet {Roomtype} med ID {Roomid} är redan under underhåll");
+        }
     }
 }
 
