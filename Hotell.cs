@@ -138,8 +138,8 @@ public class Staff
 public class Review
 {
     public int Reviewid {get; set;}
-    public string Room {get; set;}
-    public string Customer {get; set;}
+    public Room Room {get; set;} // Ref direkt till ett room-objekt
+    public Customer Customer {get; set;} // Ref direkt till ett customer-objekt
     public int Rating {get; set;}
     public string Comment {get; set;}
     //Konstruktor till klassen Review
@@ -150,6 +150,16 @@ public class Review
         Customer = customer;
         Rating = rating;
         Comment = comment;
+    }
+    //Metod för att kunna visa reviews
+    public void ShowReview()
+    {
+        Console.WriteLine("Recensionsdetaljer:");
+        Console.WriteLine($"Recension ID: {Reviewid}");
+        Console.WriteLine($"Rum: {Room.Roomtype} ID: {Room.Roomid}");
+        Console.WriteLine($"Kund: {Customer.Name}");
+        Console.WriteLine($"Betyg: {Rating}/5");
+        Console.WriteLine($"Kommentar: {Comment}");
     }
 }
 
