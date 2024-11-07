@@ -197,9 +197,38 @@ public class HotelSystem
         Console.WriteLine($"Rum {room.Roomtype} med ID {room.Roomid} har lagts till");
     }
 
+    //Autentisering och meny för val som senare ska innehålla en menu för kunder och personal 
+    //Dessa ska kallas ShowCustomerMenu och ShowStaffMenu:
+    public void AuthenticateAndShowMenu(User user)
+    {
+        if(user.Role == "Customer")
+        {
+            Console.WriteLine($"Välkommen {user.Username} Du är inloggad som kund ");
+            ShowCustomerMenu();
+        }
+        else if(user.Role == "Staff")
+        {
+            Console.WriteLine($"Välkommen {user.username} du är inloggad som personal");
+            ShowCustomerMenu();
+        }
+        else
+        {
+            Console.WriteLine("ogiltigt roll");
+        }
+    }
+
+
+
+
+
+
+
+
+
 
 }
-
+//Lägg in meny för customer 
+//Lägg in meny för Staff
 
 class Program 
 {
@@ -212,5 +241,3 @@ class Program
     }
 }
 // if eller switch case
-//Lägg in meny för customer 
-//Lägg in meny för Staff
