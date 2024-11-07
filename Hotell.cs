@@ -183,7 +183,22 @@ public class User
     }
 }
 
+//Ska hantera funktionerna i hotellhanteringssystemet
+public class HotelSystem 
+{
+    private List<Room> rooms = new List<Room>();
+    private List<Booking> bookings = new List<Booking>();
+    private List<Review> reviews = new List<Review>();
 
+    //Metod för att kunna lägga till ett rum:
+    public void AddRoom(Room room)
+    {
+        rooms.Add(room);
+        Console.WriteLine($"Rum {room.Roomtype} med ID {room.Roomid} har lagts till");
+    }
+
+
+}
 
 
 class Program 
