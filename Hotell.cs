@@ -208,7 +208,7 @@ public class HotelSystem
         }
         else if(user.Role == "Staff")
         {
-            Console.WriteLine($"Välkommen {user.username} du är inloggad som personal");
+            Console.WriteLine($"Välkommen {user.Username} du är inloggad som personal");
             ShowCustomerMenu();
         }
         else
@@ -217,13 +217,66 @@ public class HotelSystem
         }
     }
 
+        //Huvudmeny för kunden och valen att visa ett rum, boka ett rum eller att lämna en recension eller att avsluta menyn
+    public void ShowCustomerMenu()
+    {
+        bool exit = false;
+        while (!exit) //Loop som gör att menyn är aktiv tills man väljer att avsluta menyn.
+        {
+            Console.WriteLine("1. Visa tillgängliga rum");
+            Console.WriteLine("2. Boka rum");
+            Console.WriteLine("3.Lämna en recension");
+            Console.WriteLine("4. Avsluta");
 
-
-
-
-
-
-
+            switch (Console.ReadLine())
+            {
+                case "1":
+                    ShowAvailableRooms(); //Anropar metod som visar de rum som är tillgängliga
+                    break;
+                
+                case "2":
+                    Console.WriteLine("Ange rum ID för att boka ett rum")
+                    int roomid = int.Parse(Console.ReadLine());
+                    Room roomToBook = rooms.Find(r => r.Roomid == roomid);
+                    if(roomToBook != null && roomToBook.IsAvailable());
+                    {
+                        Booking newBooking = new Booking(bookingid, customer, room, startdate, enddate, status);
+                        AddBooking(newBooking);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Rummet är inte tillgängligt");
+                    }
+                    break;
+                
+                case "3":
+                    Console.WriteLine("Ange rum ID för recension");
+                    int reviewRoomid = int.Parse(Console.ReadLine());
+                    Room roomForReview = rooms.Find(r => r.Roomid == reviewRoomid);
+                    if(roomForReview != null)
+                    {
+                        Console.WriteLine("Skriv ditt betyg (1-5:)");
+                        int rating = int.Parse(Console.ReadLine());
+                        Console.WriteLine("Skriv din kommentar:");
+                        string comment = Console.ReadLine();
+                        Review newReview = new Review(reviewid, room, customer, rating, comment); 
+                        AddReview(newReview);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Ogiltigt rums ID:");
+                    }
+                    break;
+                
+                case "4":
+                exit = true;
+                break;
+                default:
+                Console.WriteLine("Ogiltigt val");
+                break;
+            }
+        }
+    }
 
 
 }
@@ -234,10 +287,7 @@ class Program
 {
     static void Main()
     {
-        Console.WriteLine("Välkommen till Hotellhanteringssystemet");
-        Console.WriteLine("1. Logga in som kund");
-        Console.WriteLine("2. Logga in som personal");//Lägg till lösenord
-        Console.WriteLine("3. Avsluta");
+
     }
 }
 // if eller switch case
