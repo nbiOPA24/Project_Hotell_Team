@@ -74,6 +74,7 @@ public class Room
 
 public class Booking
 {
+    private static int nextBookingid = 1; // Håller reda på nästa boknings id 
     public int Bookingid {get; set;}
     public Customer Customer {get; set;}
     public Room Room {get; set;}
@@ -83,7 +84,7 @@ public class Booking
     //Konstruktor till klassen Booking
     public Booking(int bookingid, Customer customer, Room room, DateTime startdate, DateTime enddate, string status)
     {
-        Bookingid = bookingid;
+        Bookingid = nextBookingid++; //Tilldela och öka id 
         Customer = customer;
         Room = room;
         Startdate = startdate;
@@ -247,14 +248,29 @@ public class HotelSystem
                     break;
                 
                 case "2":
-                    Console.WriteLine("Ange rum ID för att boka ett rum")
+                    
+                    Console.WriteLine("Ange rum ID");
                     int roomid = int.Parse(Console.ReadLine());
                     Room roomToBook = rooms.Find(r => r.Roomid == roomid);
                     
                     if(roomToBook != null && roomToBook.IsAvailable());
                     {
-                        Booking newBooking = new Booking(bookingid, customer, room, startdate, enddate, status);
+                        //Fråga användaren om kundinformation
+                        Console.WriteLine("Ange ditt namn");
+                        string CustomerName = Console.ReadLine();
+
+                        Console.WriteLine("Ange din e-post");
+                        string CustomerEmail = Console.ReadLine();
+                        
+                        //Skapar ett Customer objekt med användarens input
+                        Customer customer = new Customer(0, CustomerName, CustomerEmail, "customer");
+                        
+                        //Skapar och lägger till bokningen plus boknings id skapas automatiskt pga ändring i klassen booking 
+                        Booking newBooking = new Booking(bookingid, customer, roomToBook, DateTime.Now, DateTime.Now.AddDays(1), "Pending");
                         AddBooking(newBooking);
+                        roomToBook.Book();
+
+                        Console.WriteLine($"Din bokning har skapats med boknings ID: {newBooking.Bookingid}");
                     }
                     else
                     {
