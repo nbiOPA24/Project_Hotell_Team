@@ -196,6 +196,18 @@ public class HotelSystem
         rooms.Add(room);
         Console.WriteLine($"Rum {room.Roomtype} med ID {room.Roomid} har lagts till");
     }
+    //Metod för att lägga till en ny bokning i bokningslistan
+    public void AddBooking(Booking booking)
+    {
+        bookings.Add(booking);
+        Console.WriteLine($"Bokning {booking.Bookingid} har lagts till");
+    }
+    //Metod för att lägga till en ny recension i recensionslistan
+    public void AddReview(Review review)
+    {
+        reviews.Add(review);
+        Console.WriteLine($"Recension {review.Reviewid} har lagts till");
+    }
 
     //Autentisering och meny för val som senare ska innehålla en menu för kunder och personal 
     //Dessa ska kallas ShowCustomerMenu och ShowStaffMenu:
@@ -238,6 +250,7 @@ public class HotelSystem
                     Console.WriteLine("Ange rum ID för att boka ett rum")
                     int roomid = int.Parse(Console.ReadLine());
                     Room roomToBook = rooms.Find(r => r.Roomid == roomid);
+                    
                     if(roomToBook != null && roomToBook.IsAvailable());
                     {
                         Booking newBooking = new Booking(bookingid, customer, room, startdate, enddate, status);
@@ -253,6 +266,7 @@ public class HotelSystem
                     Console.WriteLine("Ange rum ID för recension");
                     int reviewRoomid = int.Parse(Console.ReadLine());
                     Room roomForReview = rooms.Find(r => r.Roomid == reviewRoomid);
+                    
                     if(roomForReview != null)
                     {
                         Console.WriteLine("Skriv ditt betyg (1-5:)");
@@ -278,6 +292,25 @@ public class HotelSystem
         }
     }
 
+    public void ShowStaffMenu()
+    {
+        bool exit = false;
+        while (!exit)
+        {
+            Console.WriteLine("1. Lägg till nytt rum");
+            Console.WriteLine("2. Visa alla bokningar");
+            Console.WriteLine("3. Visa alla recensioner");
+            Console.WriteLine("4. Sätt rum till underhåll");
+            Console.WriteLine("5. Checka in gäst");
+            Console.WriteLine("6. Checka ut gäst");
+            Console.WriteLine("7. Avsluta");
+            
+            switch (Console.ReadLine())
+            {
+                case "1";
+            }
+        }
+    }
 
 }
 //Lägg in meny för customer 
@@ -290,4 +323,4 @@ class Program
 
     }
 }
-// if eller switch case
+
