@@ -192,6 +192,13 @@ public class HotelSystem
     private List<Booking> bookings = new List<Booking>();
     private List<Review> reviews = new List<Review>();
 
+    //Metod för att hitta ett rum baserat på rums id
+    public Room FindRoomById(int roomId)
+    {
+        return rooms.Find(r => r.Roomid== roomId);
+    }
+
+
     //Metod för att kunna lägga till ett rum:
     public void AddRoom(Room room)
     {
