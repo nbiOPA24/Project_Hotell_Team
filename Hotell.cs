@@ -26,6 +26,7 @@ public enum Roomstatus
 
 public class Room
 {
+    private static int nextRoomid = 1; //Statiskt räknare för unika rums id
     public int Roomid {get; set;}
     public string Roomtype {get; set;}
     public int Capacity {get; set;}
@@ -33,7 +34,7 @@ public class Room
     //Konstruktor till klassen Room
     public Room(int roomid, string roomtype, int capacity, Roomstatus status)
     {
-        Roomid = roomid;
+        Roomid = nextRoomid++; // Tilldela och öka id automatiskt
         Roomtype = roomtype;
         Capacity = capacity;
         Status = status;
