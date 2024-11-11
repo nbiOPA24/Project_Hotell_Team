@@ -17,6 +17,9 @@
 //Designa en lättnavigerad användargränssnitt där kunder och personal enkelt kan använda systemet.
 
 // Enum för available, booked och undermaintenance
+
+using System;
+using System.Collections.Generic;
 public enum Roomstatus
 {
     Available,
@@ -32,7 +35,7 @@ public class Room
     public int Capacity {get; set;}
     public Roomstatus Status {get; set;}
     //Konstruktor till klassen Room
-    public Room(int roomid, string roomtype, int capacity, Roomstatus status)
+    public Room(string roomtype, int capacity, Roomstatus status)
     {
         Roomid = nextRoomid++; // Tilldela och öka id automatiskt
         Roomtype = roomtype;
@@ -83,7 +86,7 @@ public class Booking
     public DateTime Enddate {get; set;}
     public string Status {get; set;}
     //Konstruktor till klassen Booking
-    public Booking(int bookingid, Customer customer, Room room, DateTime startdate, DateTime enddate, string status)
+    public Booking(Customer customer, Room room, DateTime startdate, DateTime enddate, string status)
     {
         Bookingid = nextBookingid++; //Tilldela och öka id 
         Customer = customer;
@@ -195,7 +198,7 @@ public class HotelSystem
     //Metod för att hitta ett rum baserat på rums id
     public Room FindRoomById(int roomId)
     {
-        return rooms.Find(r => r.Roomid== roomId);
+        return rooms.Find(r => r.Roomid == roomID);
     }
 
 
@@ -259,7 +262,7 @@ public class HotelSystem
                     
                     Console.WriteLine("Ange rum ID");
                     int roomid = int.Parse(Console.ReadLine());
-                    Room roomToBook = rooms.Find(r => r.Roomid == roomid);
+                    Room roomToBook = HotelSystem.FindRoomById(roomId);
                     
                     if(roomToBook != null && roomToBook.IsAvailable());
                     {
