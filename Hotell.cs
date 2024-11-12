@@ -142,15 +142,16 @@ public class Staff
 
 public class Review
 {
+    private static int nextReviewid = 1; //En statisk variabel som håller reda på nästa id för review objekt 
     public int Reviewid {get; set;}
     public Room Room {get; set;} // Ref direkt till ett room-objekt
     public Customer Customer {get; set;} // Ref direkt till ett customer-objekt
     public int Rating {get; set;}
     public string Comment {get; set;}
     //Konstruktor till klassen Review
-    public Review(int reviewid, string room, string customer, int rating, string comment)
+    public Review(Room room, Customer customer, int rating, string comment)
     {
-        Reviewid = reviewid;
+        Reviewid = nextReviewid++; // Ökar id med 1 
         Room = room;
         Customer = customer;
         Rating = rating;
