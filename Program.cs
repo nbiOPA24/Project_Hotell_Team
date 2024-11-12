@@ -19,12 +19,15 @@ namespace HotelApp
                 {
                     case "1":
                         ui.DisplayMessage("You selected Option 1.\n");
+                        ui.DisplayOption1();
                         break;
                     case "2":
                         ui.DisplayMessage("You selected Option 2.\n");
+                        ui.DisplayOption2();
                         break;
                     case "3":
                         ui.DisplayMessage("You selected Option 3.\n");
+                        ui.DisplayOption3();
                         break;
                     case "4":
                         ui.DisplayMessage("Logging out...\n");

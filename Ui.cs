@@ -29,7 +29,38 @@ namespace HotelApp
             Console.Write("Select an option: ");
         }
 
-        
+        public void DisplayOption1() 
+        {
+            Console.Clear();
+            Console.WriteLine("Hotel Management System - Main Menu");
+            Console.WriteLine("1. Option 1 (Placeholder)");
+            Console.WriteLine("                         ");
+            Console.WriteLine("                         ");
+            Console.WriteLine("4. Logout");
+            Console.Write("Select an option: ");
+        }
+
+        public void DisplayOption2() 
+        {
+            Console.Clear();
+            Console.WriteLine("Hotel Management System - Main Menu");
+            Console.WriteLine("                         ");
+            Console.WriteLine("2. Option 2 (Placeholder)");
+            Console.WriteLine("                         ");
+            Console.WriteLine("4. Logout");
+            Console.Write("Select an option: ");
+        }
+
+        public void DisplayOption3() 
+        {
+            Console.Clear();
+            Console.WriteLine("Hotel Management System - Main Menu");
+            Console.WriteLine("                         ");
+            Console.WriteLine("                         ");
+            Console.WriteLine("3. Option 3 (Placeholder)");
+            Console.WriteLine("4. Logout");
+            Console.Write("Select an option: ");
+        }
         public void DisplayMessage(string message)
         {
             Console.WriteLine(message);
