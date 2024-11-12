@@ -1,6 +1,8 @@
+
 # Ignore build output directories
 /bin/
-//obj/
+/obj/
+
 
 # Ignore user-specific files
 *.user
