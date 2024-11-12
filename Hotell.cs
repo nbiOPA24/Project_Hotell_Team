@@ -117,9 +117,9 @@ public class Customer
     public string Contactinfo {get; set;}
     public string Role {get; set;}
     //Konstruktor till klassen Customer
-    public Customer(int customerid, string name, string contactinfo, string role)
+    public Customer(string name, string contactinfo, string role)
     {
-        Customerid = customerid;
+        Customerid = new Random().Next(1000, 9999); //Genererar slump id 
         Name = name;
         Contactinfo = contactinfo;
         Role = role;
