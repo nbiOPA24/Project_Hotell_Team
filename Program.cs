@@ -4,9 +4,10 @@ namespace HotelApp
 {
     class Program
     {
-        static void Main(string[] args)
-        {
+        static void Main(string[] args) 
+        { 
             UI ui = new UI();
+            Hotel hotel = new Hotel();
             ui.Login();  
 
             bool running = true;
@@ -17,9 +18,13 @@ namespace HotelApp
 
                 switch (choice)
                 {
-                    case "1":
-                        ui.DisplayMessage("You selected Option 1.\n");
-                        ui.DisplayOption1();
+                    case "1": 
+                        foreach (var room in hotel.Rooms)
+                        {
+                            Console.WriteLine($"Room {room.RoomNumber}: Type={room.RoomType}, Capacity={room.Capacity}, Price={room.Price}");
+                        }
+                        //ui.DisplayMessage("You selected Option 1.\n"); 
+                        //ui.DisplayOption1();
                         break;
                     case "2":
                         ui.DisplayMessage("You selected Option 2.\n");
@@ -46,3 +51,4 @@ namespace HotelApp
         }
     }
 }
+
