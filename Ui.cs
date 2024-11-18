@@ -18,19 +18,29 @@ namespace HotelApp
         }
 
         
+
         public void DisplayMenu()
         {
-            Console.Clear();
+            // Console.Clear();
             Console.WriteLine("Hotel Management System - Main Menu");
-            Console.WriteLine("1. Option 1 (Lista över rum)");
-            Console.WriteLine("2. Option 2 (Användarnamn lista)");
-            Console.WriteLine("3. Option 3 (Placeholder)");
-            Console.WriteLine("4. Option 3 Lista över review ");
+            Console.WriteLine("1. Book room");
+            Console.WriteLine("2. Review");
             Console.WriteLine("5. Logout");
             Console.Write("Select an option: ");
         }
 
-        public void DisplayOption1(Hotel hotel) 
+        public void DisplayMenuEmployee()
+        {
+            // Console.Clear();
+            Console.WriteLine("Hotel Management System - Main Menu");
+            Console.WriteLine("1. Rooms ");
+            Console.WriteLine("2. Reviews ");
+            Console.WriteLine("3. Users");
+            Console.WriteLine("4. Book/Maintence");
+            Console.WriteLine("5. Logout");
+            Console.Write("Select an option: ");
+        }
+        public void DisplayRooms(Hotel hotel) 
         {
             Console.Clear();
             Console.WriteLine("List of all rooms");
@@ -40,7 +50,7 @@ namespace HotelApp
             Console.WriteLine("                         ");
         }
             
-        public void DisplayOption2(Hotel hotel) 
+        public void DisplayUsers(Hotel hotel) 
         {
             Console.Clear();
             Console.WriteLine("List of all Users");
@@ -60,7 +70,7 @@ namespace HotelApp
             Console.WriteLine("4. Logout");
             Console.Write("Select an option: ");
         }
-        public void DisplayOption4(Hotel hotel) 
+        public void DisplayReviews(Hotel hotel) 
         {
             double AvgScore = hotel.GetAvGScore();
             Console.Clear();
