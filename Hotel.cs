@@ -58,7 +58,7 @@ public class Hotel
                 Users.Add(new User(name, true, "123", 0)); 
             }
                 name = possibleNames[random.Next(possibleNames.Length)];
-                Users.Add(new User(name, false, "0", random.Next(1, 5))); // Guests have password "0" and a random guest count
+                Users.Add(new User(name, false, "0", random.Next(1, 5))); 
             
 
         }
@@ -66,7 +66,7 @@ public class Hotel
 
     public void AddReviews()
     {
-        
+
     }
 
 
@@ -83,14 +83,10 @@ public class Hotel
 
 
 
-        //1, Adduser funktion skapa.
-        //Skapa Adduser list objekt i program.
-        //Skapa UI för for each user i en lista som man kan se på switch 2 i program.
 
 
-    //Kod för att bygga en autopopulator för rooms.
-    //Kod för att bygga en autopopulator för users
-    //Kod för att bygga en autopopulator för reviews.
+
+
     }
 }
     
