@@ -22,10 +22,11 @@ namespace HotelApp
         {
             Console.Clear();
             Console.WriteLine("Hotel Management System - Main Menu");
-            Console.WriteLine("1. Option 1 (Placeholder)");
-            Console.WriteLine("2. Option 2 (Placeholder)");
+            Console.WriteLine("1. Option 1 (Lista över rum)");
+            Console.WriteLine("2. Option 2 (Användarnamn lista)");
             Console.WriteLine("3. Option 3 (Placeholder)");
-            Console.WriteLine("4. Logout");
+            Console.WriteLine("4. Option 3 Lista över review ");
+            Console.WriteLine("5. Logout");
             Console.Write("Select an option: ");
         }
 
@@ -58,6 +59,18 @@ namespace HotelApp
             Console.WriteLine("3. Option 3 (Placeholder)");
             Console.WriteLine("4. Logout");
             Console.Write("Select an option: ");
+        }
+        public void DisplayOption4(Hotel hotel) 
+        {
+            double AvgScore = hotel.GetAvGScore();
+            Console.Clear();
+            Console.WriteLine("List of all Reviews");
+            Console.WriteLine("                         ");
+            foreach (var review in hotel.Reviews){Console.WriteLine($"Score: {review.ReviewNumber}: Review: {review.ReviewText}"); }
+            Console.WriteLine("                         ");
+            Console.WriteLine($"Avg reviewscore:{AvgScore}                        ");
+            Console.WriteLine("                         ");
+
         }
         public void DisplayMessage(string message)
         {

@@ -8,7 +8,19 @@ namespace HotelApp
         { 
             UI ui = new UI();
             Hotel hotel = new Hotel();
-            ui.Login();  
+
+            Console.WriteLine("Welcome to the Hotel Management System");
+            Console.Write("Are you an employee? (y/n:");
+            string IsEmployee = Console.ReadLine().ToLower(); // Read input and convert to lowercase
+
+            if (IsEmployee == "y")
+            {
+                Console.WriteLine("Employee access granted!");
+            }  
+            else
+            {
+                Console.WriteLine("Welcome guest!");
+            }
 
             bool running = true;
             while (running)
@@ -24,14 +36,35 @@ namespace HotelApp
                         ui.DisplayOption1(hotel);
                         break;
                     case "2":
-                        ui.DisplayMessage("You selected Option 2.\n");
-                        ui.DisplayOption2(hotel);
-                        break;
+                        if (IsEmployee == "y")
+                        {
+                            ui.DisplayMessage("You selected Option 2.\n");
+                            ui.DisplayOption2(hotel);
+                            break;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                            
                     case "3":
                         ui.DisplayMessage("You selected Option 3.\n");
                         ui.DisplayOption3();
                         break;
                     case "4":
+                        if (IsEmployee != "y")
+                        {
+                            ui.DisplayMessage("Review.\n");
+                            hotel.AddNewReview();
+                            break;
+                        }
+                        else 
+                        {
+                            ui.DisplayOption4(hotel);
+                            break;
+                        }
+
+                    case "5":
                         ui.DisplayMessage("Logging out...\n");
                         running = false; 
                         break;

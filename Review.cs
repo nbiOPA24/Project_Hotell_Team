@@ -1,7 +1,8 @@
-using system;
+using System;
 
 namespace HotelApp
 {
+    
     public class Review // Class Review
     {
        public int ReviewNumber {get; set; }
