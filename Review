@@ -1,0 +1,19 @@
+using system;
+
+namespace HotelApp
+{
+    public class Review //Skapar Class Review
+    {
+       public int ReviewNumber {get; set; }
+       public string ReviewText {get; set; }
+    
+        public Review(int reviewnumber, string reviewtext) //Konstruktor till Class Review
+        {
+            ReviewNumber = reviewnumber;
+            ReviewText = reviewtext;
+        }
+    }
+}
+    
+    
+

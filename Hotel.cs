@@ -14,7 +14,7 @@ public class Hotel
         Rooms = new List<Room>(); 
         Users = new List<User>();
         AddRooms();
-        //AddUsers();
+        AddUsers();
         //AddReviews();
     }
 
@@ -39,62 +39,58 @@ public class Hotel
                 if(RoomType == "Deluxe")
                     {Price = 1000;}
             Rooms.Add(new Room (RoomNumber, RoomType, Capacity, IsAvaliable, UnderMaintenance, Price));
-        
-        
         }
+    }
+        //om user == personal Password = 123
+        // om user == guest password = 0 
+    public void AddUsers()
+    {
+        Random random = new Random();
+        string[] possibleNames = { "Alice", "Bob", "Charlie", "David", "Emma", "Fiona", "George", "Hannah", "Ian", "Jane" };
+
+        // 
+        for (int i = 0; i < 6; i++)
+        {
+            string name = " "; //Initialisera 
+            if(i < 2)
+            {
+                name = possibleNames[random.Next(possibleNames.Length)];
+                Users.Add(new User(name, true, "123", 0)); 
+            }
+                name = possibleNames[random.Next(possibleNames.Length)];
+                Users.Add(new User(name, false, "0", random.Next(1, 5))); // Guests have password "0" and a random guest count
+            
+
+        }
+    }
+
+    public void AddReviews()
+    {
+        
+    }
+
+
+
+
+
+
+
+
+
             
 
         
 
 
 
-           
-    }
+        //1, Adduser funktion skapa.
+        //Skapa Adduser list objekt i program.
+        //Skapa UI för for each user i en lista som man kan se på switch 2 i program.
 
 
     //Kod för att bygga en autopopulator för rooms.
     //Kod för att bygga en autopopulator för users
     //Kod för att bygga en autopopulator för reviews.
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-    
-
-
-
-
-
-
-
-
-
-
-
-
+    }
 }
-
-
-
-
-
-
-
-
-
-}
+    

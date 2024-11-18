@@ -29,26 +29,24 @@ namespace HotelApp
             Console.Write("Select an option: ");
         }
 
-        public void DisplayOption1() 
+        public void DisplayOption1(Hotel hotel) 
         {
             Console.Clear();
-            Console.WriteLine("Hotel Management System - Main Menu");
-            Console.WriteLine("1. Option 1 (Placeholder)");
+            Console.WriteLine("List of all rooms");
             Console.WriteLine("                         ");
+            foreach (var room in hotel.Rooms){Console.WriteLine($"Room {room.RoomNumber}: Type={room.RoomType}, Capacity={room.Capacity}, Price={room.Price}");}
+           
             Console.WriteLine("                         ");
-            Console.WriteLine("4. Logout");
-            Console.Write("Select an option: ");
         }
-
-        public void DisplayOption2() 
+            
+        public void DisplayOption2(Hotel hotel) 
         {
             Console.Clear();
-            Console.WriteLine("Hotel Management System - Main Menu");
+            Console.WriteLine("List of all Users");
             Console.WriteLine("                         ");
-            Console.WriteLine("2. Option 2 (Placeholder)");
+            foreach (var user in hotel.Users){Console.WriteLine($"UserName: {user.UserName}: ispersonal={user.IsPersonal}, Password={user.Password}, Guest={user.Guests}");}
+           
             Console.WriteLine("                         ");
-            Console.WriteLine("4. Logout");
-            Console.Write("Select an option: ");
         }
 
         public void DisplayOption3() 

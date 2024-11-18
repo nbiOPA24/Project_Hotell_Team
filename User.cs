@@ -10,6 +10,14 @@ namespace HotelApp
         public string Password {get; set; } //Default password inte är ett måste pga gäst och personal
         public int Guests {get; set; }
         //Konstruktor till class users
+        public User(string username, bool ispersonal, string password)
+        {
+            UserName = username;
+            IsPersonal = ispersonal;
+            Password = password;
+          
+        }
+
         public User(string username, bool ispersonal, string password, int guests)
         {
             UserName = username;
@@ -17,17 +25,16 @@ namespace HotelApp
             Password = password;
             Guests = guests;
         }
-
-
-
-
-
-
-
-
-
-
     }
+}
+
+
+
+
+
+
+
+
             
 
         
@@ -35,5 +42,3 @@ namespace HotelApp
          
             
         
-
-}
