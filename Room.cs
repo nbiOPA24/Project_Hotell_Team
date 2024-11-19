@@ -10,6 +10,11 @@ namespace HotelApp
         public bool IsAvailable {get; set; }
         public bool UnderMaintenance {get; set; }
         public int Price {get; set; }
+
+        public string GuestName {get; set; }
+
+
+
         //Konstruktor till class Room
         public Room(int roomnumber, string roomtype, int capacity, bool isavailable, bool undermaintenance, int price)
         {
@@ -19,10 +24,31 @@ namespace HotelApp
             IsAvailable = isavailable; 
             UnderMaintenance = undermaintenance;
             Price = price;
+            
         }
+    public void BookRoomForGuest(string guestName)
+    {
+        GuestName = guestName;
+        IsAvailable = false;
+    }
+    public void VacateRoom()
+    {
+        GuestName = null;
+        IsAvailable = true;
+    }
+    
+
+    
+
+    
+    
+    
+    
     }
 }
 
+        
 
+        
 
 
