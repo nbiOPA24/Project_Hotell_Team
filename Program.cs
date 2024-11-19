@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
 
 namespace HotelApp
 {
@@ -10,77 +9,78 @@ namespace HotelApp
             UI ui = new UI();
             Hotel hotel = new Hotel();
 
+            // Login process
+            User LoggedIn = hotel.Login();
 
-
-            Console.WriteLine("Welcome to the Hotel Management System");
-            Console.Write("Are you an employee? (y/n): ");
-            string IsEmployee = Console.ReadLine().ToLower();  // Read input and convert to lowercase
-
-            // Compare with "y" since IsEmployee is a string
-            if (IsEmployee == "y")
+            // If the user successfully logs in
+            if (LoggedIn != null)
             {
-                Console.WriteLine("Employee access granted!");
-            }
-            else
-            {
-                Console.WriteLine("Welcome guest!");
-            }
+                bool running = true;
 
-            bool running = true;
-            while (running)
-            {
-                if(IsEmployee != "y"){
-                    ui.DisplayMenu();
-                }
-                else{
-                    ui.DisplayMenuEmployee();
-                }
-                
-
-                string choice = Console.ReadLine();
-
-                switch (choice)
+                while (running)
                 {
-                    case "1":
-                        ui.DisplayMessage("You selected Option 1.\n");
-                        ui.DisplayRooms(hotel);
-                        break;
-                    case "2":
-                        if (IsEmployee == "y")
-                        {
-                            ui.DisplayMessage("Review!.\n");
-                            ui.DisplayReviews(hotel);
-                            break;
-                        }
-                        else
-                        {
-                            ui.DisplayReviews(hotel);
-                            ui.DisplayMessage("Review!.\n");
-                            hotel.AddNewReview();
-                            break;
-                        }
-                    case "3":
-                        if (IsEmployee != "y"){
-                            break;
-                        }
-                            ui.DisplayMessage("You selected Option 2.\n");
-                            ui.DisplayUsers(hotel);
-                            break;
-                    case "4":
-                    // Under construction
-                        break;
-                    case "5":
-                        ui.DisplayMessage("Logging out...\n");
-                        running = false;
-                        break;
-                    default:
-                        ui.DisplayMessage("Invalid choice. Please try again.\n");
-                        break;
-                }
+                    // Display the menu based on whether the user is an employee or guest
+                    if (LoggedIn.IsPersonal)
+                    {
+                        ui.DisplayMenuEmployee();  // Employee-specific menu
+                    }
+                    else
+                    {
+                        ui.DisplayMenu();  // Guest-specific menu
+                    }
 
-                if (running)
-                {
-                    ui.Pause();
+                    string choice = Console.ReadLine();
+
+                    // Handle user choice
+                    switch (choice)
+                    {
+                        case "1":
+                            ui.DisplayMessage("You selected Option 1.\n");
+                            ui.DisplayRooms(hotel);  // Display rooms for both employees and guests
+                            break;
+
+                        case "2":
+                            if (LoggedIn.IsPersonal)  // If employee
+                            {
+                                ui.DisplayMessage("Employee can manage reviews.\n");
+                                ui.DisplayReviews(hotel);  // Display reviews for employee
+                            }
+                            else  // If guest
+                            {
+                                ui.DisplayReviews(hotel);  // Display reviews for guest
+                                ui.DisplayMessage("Reviewing your stay...\n");
+                                hotel.AddNewReview();  // Allow guest to add a review
+                            }
+                            break;
+
+                        case "3":
+                            if (!LoggedIn.IsPersonal)  // Skip for guests
+                            {
+                                break;
+                            }
+                            ui.DisplayMessage("You selected Option 2: View Users.\n");
+                            ui.DisplayUsers(hotel);  // Display users for employees
+                            break;
+
+                        case "4":
+                            // Under construction
+                            break;
+
+                        case "5":
+                            ui.DisplayMessage("Logging out...\n");
+                            running = false;  // Exit the loop to log out
+                            break;
+
+                        default:
+                            ui.DisplayMessage("Invalid choice. Please try again.\n");
+                            break;
+                    }
+
+                    // Pause before showing the menu again
+                    if (running)
+                    {
+                        ui.Pause();
+                    }
                 }
             }
         }

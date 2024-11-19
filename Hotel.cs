@@ -92,7 +92,7 @@ public void AddNewReview()
                 }
                 if (reviewScore >= 2 && reviewScore <= 5)
                 {
-                    validInput = true;  // Exit the loop if the input is valid
+                    validInput = true;  
                 }
                 else
                 {
@@ -122,24 +122,72 @@ public void AddNewReview()
             return totalScore / Reviews.Count;        
         }
         
+        public void Booking()
+        {   
+            foreach (var room in Rooms){Console.WriteLine($"Room {room.RoomNumber}: Type={room.RoomType}, Capacity={room.Capacity}, Price={room.Price}");}
 
+            Console.WriteLine("Witch room would you like to book?");
+        }
 
-
-
-
-
-
+        public User Login()
+        {
+            Console.WriteLine("Please enter your username:");
+            string username = Console.ReadLine();
 
             
+            User user = Users.Find(u => u.UserName == username);
 
-        
+            if (user != null)
+            {
+            
+                Console.WriteLine("Please enter your password (0 for guests):");
+                string password = Console.ReadLine();
 
+                
+                if (user.Password == password)
+                {
+                    Console.WriteLine($"{username}, you are logged in as {(user.IsPersonal ? "Employee" : "Guest")}.");
+                    return user;
+                }
+                else
+                {
+                    Console.WriteLine("Incorrect password.");
+                }
+            }
+            else
+            {
+                
+                Console.Write("Username not found. Would you like to create a new guest profile? (y/n): ");
+                string response = Console.ReadLine().ToLower();
 
+                if (response == "y")
+                {
+                    
+                    Console.Write("Please enter your name: ");
+                    string name = Console.ReadLine();
 
+                    Console.Write("How many people will be staying in the same room? ");
+                    int peopleCount;
+                    while (!int.TryParse(Console.ReadLine(), out peopleCount) || peopleCount < 1)
+                    {
+                        Console.Write("Please enter a valid number of people (1 or more): ");
+                    }
 
+                    
+                    string defaultPassword = "0"; 
+                    User newGuest = new User(name, false, defaultPassword, peopleCount); 
+                    Users.Add(newGuest); 
 
+                    Console.WriteLine($"New guest profile created for {name} with {peopleCount} people.");
+                    return newGuest; 
+                }
+                else
+                {
+                    Console.WriteLine("Returning to the main menu.");
+                }
+            }
+            return null;
+        }
+}   }
 
-
-    }
-}
     
