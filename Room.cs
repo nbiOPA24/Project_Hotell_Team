@@ -24,6 +24,7 @@ namespace HotelApp
             IsAvailable = isavailable; 
             UnderMaintenance = undermaintenance;
             Price = price;
+            GuestName = null;
             
         }
     public void BookRoomForGuest(string guestName)
@@ -37,15 +38,15 @@ namespace HotelApp
         IsAvailable = true;
     }
     
-
-    
-
-    
-    
-    
-    
     }
 }
+
+    
+
+    
+    
+    
+    
 
         
 

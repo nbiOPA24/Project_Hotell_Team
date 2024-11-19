@@ -73,7 +73,7 @@ public class Hotel
         Reviews.Add(new Review(2, "Bra frukost!"));
     }
     
-public void AddNewReview()
+    public void AddNewReview()
     {
 
         bool validInput = false;
@@ -87,7 +87,7 @@ public void AddNewReview()
 
                 if (reviewScore <2)
                 {
-                    Console.WriteLine("Were sorry 😦 and hope you would give us another chance!");
+                    Console.WriteLine("Were sorry and hope you would give us another chance!");
                     validInput = true; 
                 }
                 if (reviewScore >= 2 && reviewScore <= 5)
@@ -188,4 +188,99 @@ public void AddNewReview()
             }
             return null;
         }
-}   }
+        public void BookRoomGuest(User user)
+            {
+            
+            Console.WriteLine("Available Rooms:");
+            List<Room> availableRooms = new List<Room>();
+
+            if (user.Guests <= 4)
+            {
+                availableRooms.AddRange(Rooms.Where(room => room.Capacity >= user.Guests && room.IsAvailable && !room.UnderMaintenance));
+            }
+            else
+            {
+                availableRooms.AddRange(Rooms.Where(room => room.Capacity >= user.Guests && room.IsAvailable && !room.UnderMaintenance && room.RoomType == 	"Deluxe"));
+            }
+
+            
+            foreach (var room in availableRooms)
+            {
+                Console.WriteLine($"Room {room.RoomNumber}: Type={room.RoomType}, Capacity={room.Capacity}, Price={room.Price}");
+            }
+
+            if (availableRooms.Count == 0)
+            {
+                Console.WriteLine("No available rooms that fit your criteria.");
+                return;
+            }
+
+            
+            Console.WriteLine("Enter the room number to book:");
+            int selectedRoomNumber = int.Parse(Console.ReadLine());
+            Room selectedRoom = availableRooms.FirstOrDefault(room => room.RoomNumber == selectedRoomNumber);
+
+            if (selectedRoom != null)
+            {
+                
+                Console.WriteLine($"You selected Room {selectedRoom.RoomNumber}. Price: {selectedRoom.Price}.");
+                Console.WriteLine("Do you accept the price? (y/n): ");
+                string confirmation = Console.ReadLine().ToLower();
+
+                if (confirmation == "y")
+                {
+                    selectedRoom.BookRoomForGuest(user.UserName); 
+                    Console.WriteLine($"Room {selectedRoom.RoomNumber} has been booked successfully for {user.UserName}.");
+                }
+                else
+                {
+                    Console.WriteLine("Booking cancelled.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid room selection.");
+            }
+        }
+        public void BookRoomPersonnel(User user)
+        {
+            Console.WriteLine("Enter the room number to book or vacate:");
+            int roomNumber = int.Parse(Console.ReadLine());
+            Room room = Rooms.FirstOrDefault(r => r.RoomNumber == roomNumber);
+
+        if (room != null)
+        {
+            if (room.IsAvailable)
+            {
+                
+                Console.WriteLine("Enter the guest's name:");
+                string guestName = Console.ReadLine();
+                room.BookRoomForGuest(guestName); 
+                Console.WriteLine($"Room {room.RoomNumber} has been booked for {guestName}.");
+            }
+            else
+            {
+                
+                Console.WriteLine("The room is currently occupied. Do you want to vacate the room? (y/n):");
+                string vacateChoice = Console.ReadLine().ToLower();
+
+                if (vacateChoice == "y")
+                {
+                    room.VacateRoom(); 
+                    Console.WriteLine($"Room {room.RoomNumber} has been vacated and is now available.");
+                }
+                else
+                {
+                    Console.WriteLine("Room not vacated.");
+                }
+        }
+    }
+    else
+    {
+        Console.WriteLine("Invalid room selection.");
+    }
+    }
+    
+    } 
+
+}

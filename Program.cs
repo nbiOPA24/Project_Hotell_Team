@@ -35,6 +35,7 @@ namespace HotelApp
                     switch (choice)
                     {
                         case "1":
+                            if()
                             ui.DisplayMessage("You selected Option 1.\n");
                             ui.DisplayRooms(hotel);  // Display rooms for both employees and guests
                             break;
