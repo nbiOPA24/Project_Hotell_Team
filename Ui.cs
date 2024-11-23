@@ -21,7 +21,7 @@ namespace HotelApp
 
         public void DisplayMenu()
         {
-            // Console.Clear();
+            Console.Clear();
             Console.WriteLine("Hotel Management System - Main Menu");
             Console.WriteLine("1. Book room");
             Console.WriteLine("2. Review");
@@ -31,7 +31,7 @@ namespace HotelApp
 
         public void DisplayMenuEmployee()
         {
-            // Console.Clear();
+            Console.Clear();
             Console.WriteLine("Hotel Management System - Main Menu");
             Console.WriteLine("1. Rooms ");
             Console.WriteLine("2. Reviews ");
@@ -45,7 +45,7 @@ namespace HotelApp
             Console.Clear();
             Console.WriteLine("List of all rooms");
             Console.WriteLine("                         ");
-            foreach (var room in hotel.Rooms){Console.WriteLine($"Room {room.RoomNumber}: Type={room.RoomType}, Capacity={room.Capacity}, Price={room.Price}");}
+            foreach (var room in hotel.Rooms){Console.WriteLine($"Room {room.RoomNumber}: Type={room.RoomType}, Capacity={room.Capacity}, Price={room.Price}, Guest={room.GuestName}");}
            
             Console.WriteLine("                         ");
         }

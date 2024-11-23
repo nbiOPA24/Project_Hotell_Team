@@ -16,7 +16,7 @@ namespace HotelApp
 
 
         //Konstruktor till class Room
-        public Room(int roomnumber, string roomtype, int capacity, bool isavailable, bool undermaintenance, int price)
+        public Room(int roomnumber, string roomtype, int capacity, bool isavailable, bool undermaintenance, int price, string guestname)
         {
             RoomNumber = roomnumber;
             RoomType = roomtype;
@@ -24,19 +24,19 @@ namespace HotelApp
             IsAvailable = isavailable; 
             UnderMaintenance = undermaintenance;
             Price = price;
-            GuestName = null;
+            GuestName = guestname;
             
         }
-    public void BookRoomForGuest(string guestName)
-    {
+        public void BookRoomForGuest(string guestName)
+        {
         GuestName = guestName;
         IsAvailable = false;
-    }
-    public void VacateRoom()
-    {
+        }
+        public void VacateRoom()
+        {
         GuestName = null;
         IsAvailable = true;
-    }
+        }
     
     }
 }

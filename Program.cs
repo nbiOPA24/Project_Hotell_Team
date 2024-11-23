@@ -35,7 +35,14 @@ namespace HotelApp
                     switch (choice)
                     {
                         case "1":
-                            if()
+                            if(LoggedIn.IsPersonal)
+                            {
+                                hotel.BookRoomPersonnel();
+                            }
+                            else
+                            {
+                                hotel.BookRoomGuest(LoggedIn);
+                            }
                             ui.DisplayMessage("You selected Option 1.\n");
                             ui.DisplayRooms(hotel);  // Display rooms for both employees and guests
                             break;
@@ -59,13 +66,19 @@ namespace HotelApp
                             {
                                 break;
                             }
-                            ui.DisplayMessage("You selected Option 2: View Users.\n");
-                            ui.DisplayUsers(hotel);  // Display users for employees
-                            break;
+                                ui.DisplayMessage("You selected Option 2: View Users.\n");
+                                ui.DisplayUsers(hotel);  // Display users for employees
+                                break;
 
                         case "4":
-                            // Under construction
+                            if (!LoggedIn.IsPersonal)
+                            {
+                                Console.WriteLine("Access denied. This option is available only for staff.");
                             break;
+                            }
+                                Console.WriteLine("Staff-specific function (Add or Manage Rooms)");
+                                hotel.AddRoomsAdmin();
+                                break;
 
                         case "5":
                             ui.DisplayMessage("Logging out...\n");

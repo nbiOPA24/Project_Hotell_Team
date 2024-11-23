@@ -20,6 +20,8 @@ public class Hotel
 
     public void AddRooms()
     {
+            Rooms.Add(new Room(1020, "standard", 4, false, false, 500, "Kalle" ));
+        
         for(int i = 0; i < 10; i++)
         {
             int RoomNumber = 1000 + i;
@@ -38,15 +40,76 @@ public class Hotel
             int Price = 500;
                 if(RoomType == "Deluxe")
                     {Price = 1000;}
-            Rooms.Add(new Room (RoomNumber, RoomType, Capacity, IsAvaliable, UnderMaintenance, Price));
+
+            string guestname = null;        
+            Rooms.Add(new Room (RoomNumber, RoomType, Capacity, IsAvaliable, UnderMaintenance, Price, guestname));
+        }
+        
+    }
+
+   public void AddRoomsAdmin()
+    {
+        int RoomNumber = 1000 + Rooms.Count()+1;
+        string GuestName = null;
+        string RoomType = "Standard";
+        bool IsAvailable = true;
+        bool UnderMaintenance = false;
+        int Capacity = 4;
+        int Price = 500;
+
+        Console.WriteLine("Enter the name of the guest(Leave empty if no guess)");
+        string input = Console.ReadLine();
+        if (input != null)
+        {
+            GuestName = input;
+            Console.WriteLine("How many quests?(1-6)");
+            int Guests = int.Parse(Console.ReadLine());
+                if(Guests > 4)
+                {
+                    RoomType = "Deluxe";
+                    Capacity = 6;
+                    IsAvailable = false;
+                    Price = 1000;
+                }
+
+        }
+
+        // Capacity to 6 
+        // RoomType to Deluxe
+        // If you have no guests
+
+        Rooms.Add(new Room (RoomNumber, RoomType, Capacity, IsAvailable, UnderMaintenance, Price, GuestName));
+    }
+    
+    public void RemoveRoom()
+    {
+        Console.WriteLine("Which Room would you like to remove?");
+        int roomNumber = int.Parse(Console.ReadLine());
+
+        // Use RemoveAll with a predicate to find the room by its RoomNumber
+        int removedCount = Rooms.RemoveAll(room => room.RoomNumber == roomNumber);
+
+        if (removedCount > 0)
+        {
+            Console.WriteLine($"Room {roomNumber} has been removed.");
+        }
+        else
+        {
+            Console.WriteLine($"No room found with RoomNumber {roomNumber}.");
         }
     }
-        //om user == personal Password = 123
-        // om user == guest password = 0 
+      
+        
+        
+        //if user == personal Password = 123
+        // if user == guest password = 0 
     public void AddUsers()
     {
         Random random = new Random();
         string[] possibleNames = { "Alice", "Bob", "Charlie", "David", "Emma", "Fiona", "George", "Hannah", "Ian", "Jane" };
+        
+        Users.Add(new User("Admin", true, "123", 0)); // For logging write Admin Password 123
+        
 
         // 
         for (int i = 0; i < 6; i++)
@@ -67,10 +130,10 @@ public class Hotel
     public void AddReviews()
     {
 
-        Reviews.Add(new Review(5, "Riktigt bra hotel!"));
-        Reviews.Add(new Review(4, "Barnfritt och mysigt hotel!"));
-        Reviews.Add(new Review(3, "Bra sängar och service!"));
-        Reviews.Add(new Review(2, "Bra frukost!"));
+        Reviews.Add(new Review(5, "Really nice hotel!"));
+        Reviews.Add(new Review(4, "Child free and nice hotel!"));
+        Reviews.Add(new Review(3, "Good serice and beds!"));
+        Reviews.Add(new Review(2, "Great Breakfest!"));
     }
     
     public void AddNewReview()
@@ -203,6 +266,11 @@ public class Hotel
                 availableRooms.AddRange(Rooms.Where(room => room.Capacity >= user.Guests && room.IsAvailable && !room.UnderMaintenance && room.RoomType == 	"Deluxe"));
             }
 
+            if (availableRooms.Count == 0 )
+            {
+                Console.WriteLine("No available rooms that fit your critera");
+                return;
+            }
             
             foreach (var room in availableRooms)
             {
@@ -217,7 +285,12 @@ public class Hotel
 
             
             Console.WriteLine("Enter the room number to book:");
-            int selectedRoomNumber = int.Parse(Console.ReadLine());
+            if (!int.TryParse(Console.ReadLine(), out int selectedRoomNumber))
+            {
+                Console.WriteLine("Invalid input. Please enter a valid room number.");
+                return;
+            }
+            
             Room selectedRoom = availableRooms.FirstOrDefault(room => room.RoomNumber == selectedRoomNumber);
 
             if (selectedRoom != null)
@@ -242,7 +315,7 @@ public class Hotel
                 Console.WriteLine("Invalid room selection.");
             }
         }
-        public void BookRoomPersonnel(User user)
+        public void BookRoomPersonnel()
         {
             Console.WriteLine("Enter the room number to book or vacate:");
             int roomNumber = int.Parse(Console.ReadLine());
