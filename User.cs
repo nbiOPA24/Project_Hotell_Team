@@ -5,11 +5,11 @@ namespace HotelApp
 {
     public class User //Class user
     {
-        public string UserName {get; set; }
-        public bool IsPersonal {get; set; }
-        public string Password {get; set; } //Default password inte är ett måste pga gäst och personal
-        public int Guests {get; set; }
-        //Konstruktor till class users
+        public string UserName {get; set; } // Name of the user
+        public bool IsPersonal {get; set; } // Whether the user is staff
+        public string Password {get; set; } // Password for login
+        public int Guests {get; set; } // Number of guests for booking
+        // Constructor for User
         public User(string username, bool ispersonal, string password)
         {
             UserName = username;

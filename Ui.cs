@@ -7,7 +7,7 @@ namespace HotelApp
         public bool IsEmployee { get; private set; } 
 
         
-        public void Login() //Tillfällig placeholder login
+        public void Login() // login process
         {
             Console.WriteLine("Welcome to the Hotel Management System");
             Console.Write("Are you an employee? (y/n): ");
@@ -19,7 +19,7 @@ namespace HotelApp
 
         
 
-        public void DisplayMenu()
+        public void DisplayMenu() // Display the main menu for guests
         {
             Console.Clear();
             Console.WriteLine("Hotel Management System - Main Menu");
@@ -29,7 +29,7 @@ namespace HotelApp
             Console.Write("Select an option: ");
         }
 
-        public void DisplayMenuEmployee()
+        public void DisplayMenuEmployee() // Display the main menu for staff
         {
             Console.Clear();
             Console.WriteLine("Hotel Management System - Main Menu");
@@ -40,7 +40,7 @@ namespace HotelApp
             Console.WriteLine("5. Logout");
             Console.Write("Select an option: ");
         }
-        public void DisplayRooms(Hotel hotel) 
+        public void DisplayRooms(Hotel hotel) // Display all rooms and their details
         {
             Console.Clear();
             Console.WriteLine("List of all rooms");
@@ -50,7 +50,7 @@ namespace HotelApp
             Console.WriteLine("                         ");
         }
             
-        public void DisplayUsers(Hotel hotel) 
+        public void DisplayUsers(Hotel hotel) // Display users
         {
             Console.Clear();
             Console.WriteLine("List of all Users");
@@ -70,7 +70,7 @@ namespace HotelApp
             Console.WriteLine("4. Logout");
             Console.Write("Select an option: ");
         }
-        public void DisplayReviews(Hotel hotel) 
+        public void DisplayReviews(Hotel hotel) // Display reviews
         {
             double AvgScore = hotel.GetAvGScore();
             Console.Clear();
@@ -82,13 +82,13 @@ namespace HotelApp
             Console.WriteLine("                         ");
 
         }
-        public void DisplayMessage(string message)
+        public void DisplayMessage(string message) // Display a message to the user
         {
             Console.WriteLine(message);
         }
 
         
-        public void Pause() //Prova Paus det ser bra ut
+        public void Pause() // Pause the program until the user presses Enter
         {
             Console.WriteLine("Press Enter to continue...");
             Console.ReadLine();

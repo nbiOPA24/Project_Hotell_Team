@@ -4,25 +4,25 @@ namespace HotelApp
 {
 public class Hotel
 {
-    public List<Review> Reviews; 
-    public List<Room> Rooms;
-    public List<User> Users;
+    public List<Review> Reviews; // Stores all reviews left by guests
+    public List<Room> Rooms; // Stores all room data
+    public List<User> Users; // Stores all user data (both guests and staff)
 
     public Hotel()
     {
-        Reviews = new List<Review>(); 
-        Rooms = new List<Room>(); 
-        Users = new List<User>();
-        AddRooms();
-        AddUsers();
-        AddReviews();
+        Reviews = new List<Review>(); // Initialize review list
+        Rooms = new List<Room>(); // Initialize room list
+        Users = new List<User>(); // Initialize user list
+        AddRooms(); // Adds rooms
+        AddUsers(); // Adds users
+        AddReviews(); // Adds reviews
     }
 
-    public void AddRooms()
+    public void AddRooms() // Add default rooms to the system
     {
             Rooms.Add(new Room(1020, "standard", 4, false, false, 500, "Kalle" ));
         
-        for(int i = 0; i < 10; i++)
+        for(int i = 0; i < 10; i++) // Loop to dynamically create rooms
         {
             int RoomNumber = 1000 + i;
 
@@ -41,23 +41,23 @@ public class Hotel
                 if(RoomType == "Deluxe")
                     {Price = 1000;}
 
-            string guestname = null;        
+            string guestname = null; // Initially no guest       
             Rooms.Add(new Room (RoomNumber, RoomType, Capacity, IsAvaliable, UnderMaintenance, Price, guestname));
         }
         
     }
 
-   public void AddRoomsAdmin()
+   public void AddRoomsAdmin() // Staff adds a new room
     {
-        int RoomNumber = 1000 + Rooms.Count()+1;
-        string GuestName = null;
+        int RoomNumber = 1000 + Rooms.Count()+1; // Automatically generate the next room number
+        string GuestName = null; // Default no guest assigned
         string RoomType = "Standard";
         bool IsAvailable = true;
         bool UnderMaintenance = false;
         int Capacity = 4;
         int Price = 500;
 
-        Console.WriteLine("Enter the name of the guest(Leave empty if no guess)");
+        Console.WriteLine("Enter the name of the guest(Leave empty if no guest)");
         string input = Console.ReadLine();
         if (input != null)
         {
@@ -66,9 +66,9 @@ public class Hotel
             int Guests = int.Parse(Console.ReadLine());
                 if(Guests > 4)
                 {
-                    RoomType = "Deluxe";
+                    RoomType = "Deluxe"; // Update to Deluxe if more than 4 guests
                     Capacity = 6;
-                    IsAvailable = false;
+                    IsAvailable = false;  // Room is booked
                     Price = 1000;
                 }
 
@@ -81,12 +81,12 @@ public class Hotel
         Rooms.Add(new Room (RoomNumber, RoomType, Capacity, IsAvailable, UnderMaintenance, Price, GuestName));
     }
     
-    public void RemoveRoom()
+    public void RemoveRoom() // Removes a room by its room number
     {
         Console.WriteLine("Which Room would you like to remove?");
         int roomNumber = int.Parse(Console.ReadLine());
 
-        // Use RemoveAll with a predicate to find the room by its RoomNumber
+        // Remove room by RoomNumber
         int removedCount = Rooms.RemoveAll(room => room.RoomNumber == roomNumber);
 
         if (removedCount > 0)
@@ -103,7 +103,7 @@ public class Hotel
         
         //if user == personal Password = 123
         // if user == guest password = 0 
-    public void AddUsers()
+    public void AddUsers() // Adds default users to the system
     {
         Random random = new Random();
         string[] possibleNames = { "Alice", "Bob", "Charlie", "David", "Emma", "Fiona", "George", "Hannah", "Ian", "Jane" };
@@ -111,23 +111,23 @@ public class Hotel
         Users.Add(new User("Admin", true, "123", 0)); // For logging write Admin Password 123
         
 
-        // 
-        for (int i = 0; i < 6; i++)
+        
+        for (int i = 0; i < 6; i++) // Adds 2 staff users and 4 guest users 
         {
             string name = " "; //Initialisera 
             if(i < 2)
             {
                 name = possibleNames[random.Next(possibleNames.Length)];
-                Users.Add(new User(name, true, "123", 0)); 
+                Users.Add(new User(name, true, "123", 0));  // Staff users
             }
                 name = possibleNames[random.Next(possibleNames.Length)];
-                Users.Add(new User(name, false, "0", random.Next(1, 5))); 
+                Users.Add(new User(name, false, "0", random.Next(1, 5))); // Guest users
             
 
         }
     }
 
-    public void AddReviews()
+    public void AddReviews() // Add default reviews to the system
     {
 
         Reviews.Add(new Review(5, "Really nice hotel!"));
@@ -136,7 +136,7 @@ public class Hotel
         Reviews.Add(new Review(2, "Great Breakfest!"));
     }
     
-    public void AddNewReview()
+    public void AddNewReview() // Allows guests to add a new review
     {
 
         bool validInput = false;
@@ -175,30 +175,30 @@ public class Hotel
 
         }
 
-        public double GetAvGScore()
+        public double GetAvGScore() // Calculates the average review score
         {
             double totalScore = 0;
             foreach (var review in Reviews)
             {
                 totalScore += review.ReviewNumber;
             }
-            return totalScore / Reviews.Count;        
+            return totalScore / Reviews.Count; // Return the average        
         }
         
-        public void Booking()
+        public void Booking() // Displays all available rooms for booking
         {   
             foreach (var room in Rooms){Console.WriteLine($"Room {room.RoomNumber}: Type={room.RoomType}, Capacity={room.Capacity}, Price={room.Price}");}
 
             Console.WriteLine("Witch room would you like to book?");
         }
 
-        public User Login()
+        public User Login()  // Handles the login process for both staff and guest
         {
             Console.WriteLine("Please enter your username:");
             string username = Console.ReadLine();
 
             
-            User user = Users.Find(u => u.UserName == username);
+            User user = Users.Find(u => u.UserName == username); // Find the user by username
 
             if (user != null)
             {
@@ -207,7 +207,7 @@ public class Hotel
                 string password = Console.ReadLine();
 
                 
-                if (user.Password == password)
+                if (user.Password == password) // Check if the password matches
                 {
                     Console.WriteLine($"{username}, you are logged in as {(user.IsPersonal ? "Employee" : "Guest")}.");
                     return user;
@@ -237,7 +237,7 @@ public class Hotel
                     }
 
                     
-                    string defaultPassword = "0"; 
+                    string defaultPassword = "0"; // Default password for guests
                     User newGuest = new User(name, false, defaultPassword, peopleCount); 
                     Users.Add(newGuest); 
 
@@ -249,9 +249,9 @@ public class Hotel
                     Console.WriteLine("Returning to the main menu.");
                 }
             }
-            return null;
+            return null; // Login failed
         }
-        public void BookRoomGuest(User user)
+        public void BookRoomGuest(User user) // Guest books a room
             {
             
             Console.WriteLine("Available Rooms:");
@@ -302,7 +302,7 @@ public class Hotel
 
                 if (confirmation == "y")
                 {
-                    selectedRoom.BookRoomForGuest(user.UserName); 
+                    selectedRoom.BookRoomForGuest(user.UserName);  // Mark room as booked
                     Console.WriteLine($"Room {selectedRoom.RoomNumber} has been booked successfully for {user.UserName}.");
                 }
                 else
@@ -315,7 +315,7 @@ public class Hotel
                 Console.WriteLine("Invalid room selection.");
             }
         }
-        public void BookRoomPersonnel()
+        public void BookRoomPersonnel() // Handles staff room booking and check-in
         {
             Console.WriteLine("Enter the room number to book or vacate:");
             int roomNumber = int.Parse(Console.ReadLine());
@@ -328,7 +328,7 @@ public class Hotel
                 
                 Console.WriteLine("Enter the guest's name:");
                 string guestName = Console.ReadLine();
-                room.BookRoomForGuest(guestName); 
+                room.BookRoomForGuest(guestName); // Book the room for the guest
                 Console.WriteLine($"Room {room.RoomNumber} has been booked for {guestName}.");
             }
             else
